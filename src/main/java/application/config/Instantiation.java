@@ -3,6 +3,7 @@ package application.config;
 import application.domain.Post;
 import application.domain.User;
 import application.dto.AuthorDTO;
+import application.dto.CommentDTO;
 import application.repository.PostRepository;
 import application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,12 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null,simpleDateFormat.parse("27/07/22"),"Roadtrip!", "Let`s go Prag",new AuthorDTO(maria)  );
         Post post2 = new Post(null,simpleDateFormat.parse("29/07/22"),"Good morning life", "Happy day today",new AuthorDTO(maria) );
+
+        CommentDTO c1 = new CommentDTO("Have a nice trip!", simpleDateFormat.parse("27/07/22"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Enjoy", simpleDateFormat.parse("29/07/22"),new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Have a nice day", simpleDateFormat.parse("29/07/22"),new AuthorDTO(maria));
+        post1.getComments().addAll(Arrays.asList(c1,c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll((Arrays.asList(post1,post2)));
 
