@@ -1,5 +1,6 @@
 package application.resources;
 
+import application.domain.Post;
 import application.domain.User;
 import application.dto.UserDTO;
 import application.services.UserService;
@@ -51,6 +52,11 @@ public class UserResource {
         obj.setId(id);
         service.updateUser(obj);
         return ResponseEntity.noContent().build();
+    }
+    @RequestMapping(value="/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity <List<Post>> findPostById(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 }
